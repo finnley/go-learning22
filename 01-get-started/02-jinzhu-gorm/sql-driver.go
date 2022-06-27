@@ -84,17 +84,15 @@ func (d *ServiceDiscoveryMySQLServiceDriver) Open(dsn string) (driver.Conn, erro
 }
 
 func main() {
-	//dsn := "root:root@tcp(127.0.0.1:3357)/gorm_test"
-	dsn := "@tcp(127.0.0.1:3357)/"
+	dsn := "root:root@tcp(127.0.0.1:3357)/gorm_test"
+	//dsn := "@tcp(127.0.0.1:3357)/"
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
 		panic(err)
 	}
 	defer db.Close() // 注意这行代码要写在上面err判断的下面
 
-	//err = db.Ping()
-	err = db.PingContext(context.Background())
-	fmt.Println(err)
+	err = db.Ping()
 
 	//s := ServiceDiscoveryMySQLServiceDriver{}
 	//_, err := s.Open(dsn)
